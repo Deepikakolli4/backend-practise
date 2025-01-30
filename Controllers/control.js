@@ -12,4 +12,18 @@ const createUser = async (req,res)=>{
         return res.status(400).json({status:400 , message:'error in creating user'});
     }
 };
-module.exports = {createUser};
+
+const getUser = async(req,res)=>{
+    try{
+    const {email} = req.body;
+    users = await services.getUser(email);
+    if(users.length===0){
+        return res.status(200).json({status:200 , data:[]});
+    }else{
+        return res.status(200).json({status:200 , data:users});
+    }
+    }catch(error){
+        res.status(400).json({status:400,message:error.message});
+    }
+}
+module.exports = {createUser,getUser};

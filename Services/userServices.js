@@ -14,4 +14,13 @@ const createUser = async (email, password) => {
         console.log(error);
     }
 };
-module.exports = { createUser };
+const getUser = async(email)=>{
+    try{
+        const users = await User.find();
+        console.log(users,"hello");
+        return users;
+    }catch(error){
+        throw Error("Error in fetching users");
+    }
+};
+module.exports = { createUser , getUser };
